@@ -1,0 +1,42 @@
+{
+  "onboarding": {
+    "name": "Onboarding",
+    "description": "Skills for kickoff calls, implementation handoff, and success-plan drafting"
+  },
+  "health-and-risk": {
+    "name": "Health & Risk",
+    "description": "Skills for health scoring, churn-signal triage, and save plays"
+  },
+  "expansion": {
+    "name": "Expansion",
+    "description": "Skills for upsell/cross-sell motions and usage-based expansion triggers"
+  },
+  "renewals": {
+    "name": "Renewals",
+    "description": "Skills for renewal timelines, negotiation prep, and contract review support"
+  },
+  "qbr-and-reporting": {
+    "name": "QBR & Reporting",
+    "description": "Skills for QBR/EBR prep, exec summaries, and ROI reporting"
+  },
+  "communication": {
+    "name": "Communication",
+    "description": "Skills for email drafting, stakeholder updates, and escalation messaging"
+  },
+  "account-planning": {
+    "name": "Account Planning",
+    "description": "Skills for stakeholder mapping, whitespace analysis, and territory planning"
+  },
+  "crm-hygiene": {
+    "name": "CRM Hygiene",
+    "description": "Skills for notes cleanup, data entry assistance, and CRM field consistency"
+  },
+  "cross-functional": {
+    "name": "Cross-Functional",
+    "description": "Skills for support/product/sales handoffs and internal escalation routing"
+  },
+  "metrics": {
+    "name": "Metrics",
+    "description": "Skills for NRR/GRR, forecasting, and portfolio-level reporting"
+  }
+}

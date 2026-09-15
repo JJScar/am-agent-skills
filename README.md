@@ -1,4 +1,4 @@
-# AM Skills
+# Account Manager Skills
 
 Packaged, agent-ready skills for account managers — kickoff prep, churn triage, QBR prep, renewal prep, escalation emails, and more.
 
