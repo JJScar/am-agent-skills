@@ -1,0 +1,29 @@
+# Internal planning docs — never pushed, local-only
+docs/project-docs/
+
+# Reference clone kept for inspiration only — not part of this repo's history.
+# It has its own nested .git, which would otherwise show up as a stray
+# submodule/gitlink entry once this root is a git repo.
+agent-skills/
+
+# Dependencies
+node_modules/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# OS / editor junk
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
