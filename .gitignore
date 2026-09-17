@@ -27,3 +27,9 @@ build/
 # Logs
 *.log
 npm-debug.log*
+
+
+
+.nx/cache
+.nx/workspace-data
+.nx/migrate-runs
