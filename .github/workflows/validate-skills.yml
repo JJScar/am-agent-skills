@@ -1,0 +1,44 @@
+name: Validate skills
+
+on:
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'tools/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/validate-skills.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'skills/**'
+      - 'tools/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/validate-skills.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Validate skill frontmatter and structure
+        run: npm run validate
+
+      - name: Check skills-registry.json is up to date
+        run: |
+          npm run generate:registry
+          if [ -n "$(git status --porcelain skills-registry.json)" ]; then
+            echo "::error::skills-registry.json is stale. Run 'npm run generate:registry' locally and commit the result."
+            git diff -- skills-registry.json
+            exit 1
+          fi
