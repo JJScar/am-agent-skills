@@ -1,0 +1,18 @@
+{
+  "name": "am-skills",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "validate": "node tools/validate-skills.mjs",
+    "generate:registry": "node tools/generate-registry.mjs",
+    "generate:catalog": "node tools/generate-catalog.mjs",
+    "scaffold": "node tools/skill-plugin/generate-skill.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.3",
+    "js-yaml": "^4.1.0"
+  }
+}
