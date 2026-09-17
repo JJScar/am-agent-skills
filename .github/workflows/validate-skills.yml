@@ -5,6 +5,7 @@ on:
     paths:
       - 'skills/**'
       - 'tools/**'
+      - 'docs/CATALOG.md'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/validate-skills.yml'
@@ -14,6 +15,7 @@ on:
     paths:
       - 'skills/**'
       - 'tools/**'
+      - 'docs/CATALOG.md'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/validate-skills.yml'
@@ -40,5 +42,14 @@ jobs:
           if [ -n "$(git status --porcelain skills-registry.json)" ]; then
             echo "::error::skills-registry.json is stale. Run 'npm run generate:registry' locally and commit the result."
             git diff -- skills-registry.json
+            exit 1
+          fi
+
+      - name: Check docs/CATALOG.md is up to date
+        run: |
+          npm run generate:catalog
+          if [ -n "$(git status --porcelain docs/CATALOG.md)" ]; then
+            echo "::error::docs/CATALOG.md is stale. Run 'npm run generate:catalog' locally and commit the result."
+            git diff -- docs/CATALOG.md
             exit 1
           fi
