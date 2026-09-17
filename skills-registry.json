@@ -1,0 +1,120 @@
+{
+  "version": "1.0.0",
+  "categories": {
+    "onboarding": {
+      "name": "Onboarding",
+      "description": "Skills for kickoff calls, implementation handoff, and success-plan drafting"
+    },
+    "health-and-risk": {
+      "name": "Health & Risk",
+      "description": "Skills for health scoring, churn-signal triage, and save plays"
+    },
+    "expansion": {
+      "name": "Expansion",
+      "description": "Skills for upsell/cross-sell motions and usage-based expansion triggers"
+    },
+    "renewals": {
+      "name": "Renewals",
+      "description": "Skills for renewal timelines, negotiation prep, and contract review support"
+    },
+    "qbr-and-reporting": {
+      "name": "QBR & Reporting",
+      "description": "Skills for QBR/EBR prep, exec summaries, and ROI reporting"
+    },
+    "communication": {
+      "name": "Communication",
+      "description": "Skills for email drafting, stakeholder updates, and escalation messaging"
+    },
+    "account-planning": {
+      "name": "Account Planning",
+      "description": "Skills for stakeholder mapping, whitespace analysis, and territory planning"
+    },
+    "crm-hygiene": {
+      "name": "CRM Hygiene",
+      "description": "Skills for notes cleanup, data entry assistance, and CRM field consistency"
+    },
+    "cross-functional": {
+      "name": "Cross-Functional",
+      "description": "Skills for support/product/sales handoffs and internal escalation routing"
+    },
+    "metrics": {
+      "name": "Metrics",
+      "description": "Skills for NRR/GRR, forecasting, and portfolio-level reporting"
+    }
+  },
+  "skills": [
+    {
+      "name": "churn-signal-triage",
+      "description": "Helps a technical Account Manager triage churn-risk signals on a single account, work out a likely root cause, and pick a save play — not to design a company-wide health-scoring system. Use when the AM says things like \"this account is going quiet\", \"why is [customer] at risk\", \"signs of churn on this account\", \"help me triage this account's health\", \"should I escalate this account\", or \"haven't heard from [customer] in weeks\". Do NOT use for kickoff/onboarding prep, QBR/EBR prep, or renewal negotiation prep — those are separate skills in the onboarding, qbr-and-reporting, and renewals categories.",
+      "category": "health-and-risk",
+      "path": "health-and-risk/churn-signal-triage",
+      "files": [
+        "SKILL.md",
+        "references/signal-to-play-reference.md"
+      ],
+      "author": "JJScar",
+      "version": "1.0.0",
+      "audience": "technical",
+      "bodyLines": 81,
+      "contentHash": "c3eeda3c2aeddfd0e46798f4c285f59ea19f501a8effe8e1f10f05609b1ea267"
+    },
+    {
+      "name": "escalation-email-drafting",
+      "description": "Helps a technical Account Manager draft escalation and stakeholder emails when something's off track: a customer-facing issue/delay notice, an apology, an internal ask for exec or cross-functional help, or a stakeholder status update. Use when the AM says things like \"draft an escalation email for [customer]\", \"write an internal escalation to get help on this account\", \"how do I tell [customer] about this delay\", \"draft an apology email\", or \"loop in my manager on this account issue\". Do NOT use for QBR exec summaries, renewal proposal emails, routine kickoff agendas, or deciding how severe a risk is (run churn-signal-triage first if that hasn't been done) — those belong to the qbr-and-reporting, renewals, onboarding, and health-and-risk categories.",
+      "category": "communication",
+      "path": "communication/escalation-email-drafting",
+      "files": [
+        "SKILL.md"
+      ],
+      "author": "JJScar",
+      "version": "1.0.0",
+      "audience": "technical",
+      "bodyLines": 53,
+      "contentHash": "a29a42a80ebf9600d78f745eb2e89872a241dc2381cee8f9405b86202d3aac91"
+    },
+    {
+      "name": "kickoff-prep",
+      "description": "Helps a technical Account Manager prep for a new customer's kickoff call and the sales-to-onboarding handoff: gathers account context, maps stakeholders, drafts a kickoff agenda, and sketches a first-pass success plan with milestones. Use when the AM says things like \"prep my kickoff call\", \"new customer just closed, help me onboard them\", \"build a success plan for [customer]\", \"draft the implementation handoff\", or \"first call with [customer] is next week\". Do NOT use for ongoing health scoring or churn triage, QBR/EBR prep on an existing account, or renewal/negotiation prep — those belong to separate skills in the health-and-risk, qbr-and-reporting, and renewals categories.",
+      "category": "onboarding",
+      "path": "onboarding/kickoff-prep",
+      "files": [
+        "SKILL.md",
+        "references/kickoff-agenda-example.md"
+      ],
+      "author": "JJScar",
+      "version": "1.0.0",
+      "audience": "technical",
+      "bodyLines": 76,
+      "contentHash": "70776e3e57842bac3c1ad06bb87a1388bf090f27ac9a3fb1eaa901b37113f8b3"
+    },
+    {
+      "name": "qbr-prep",
+      "description": "Helps a technical Account Manager prepare a QBR/EBR for an existing account: pulls together usage and outcomes since the last review, builds an ROI narrative tied to why they bought, and produces a deck outline plus a one-page exec summary. Use when the AM says things like \"prep my QBR for [customer]\", \"build a QBR deck\", \"help me put together an EBR\", \"quarterly business review for [customer]\", or \"exec summary for [customer]'s QBR\". Do NOT use for kickoff/onboarding prep, churn-signal triage (a QBR can surface a real risk worth flagging, but triaging it is a separate skill), or renewal negotiation — those are separate skills in the onboarding, health-and-risk, and renewals categories.",
+      "category": "qbr-and-reporting",
+      "path": "qbr-and-reporting/qbr-prep",
+      "files": [
+        "SKILL.md",
+        "assets/qbr-deck-outline.md"
+      ],
+      "author": "JJScar",
+      "version": "1.0.0",
+      "audience": "technical",
+      "bodyLines": 68,
+      "contentHash": "25a4621954d7664b886b45fec3f4109170337f529157862e3a26bd8b4f5400c1"
+    },
+    {
+      "name": "renewal-prep",
+      "description": "Helps a technical Account Manager manage a renewal timeline and prep for the negotiation conversation on a specific account: figures out what to do at this point in the timeline, checks whether this is a healthy renewal or a save situation, builds the value story, and preps responses to likely asks (discount, downgrade, multi-year terms). Use when the AM says things like \"prep for [customer]'s renewal\", \"renewal coming up for [customer]\", \"help me negotiate this renewal\", \"when should I start the renewal conversation\", or \"[customer] wants a discount on renewal\". Do NOT use for QBR prep, churn-signal triage (run that first if risk is suspected), or drafting final legal contract language — those belong to the qbr-and-reporting and health-and-risk categories, and to legal/deal-desk review, respectively.",
+      "category": "renewals",
+      "path": "renewals/renewal-prep",
+      "files": [
+        "SKILL.md"
+      ],
+      "author": "JJScar",
+      "version": "1.0.0",
+      "audience": "technical",
+      "bodyLines": 62,
+      "contentHash": "313a9f8f14d932b2551c788350588f3ac54b7c39de9ddda07339b81f6d243f95"
+    }
+  ]
+}
