@@ -5,18 +5,10 @@
 // registry changes. See docs/project-docs/ARCHITECTURE.md §6 layer 2.
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { summarizeDescription } from './lib/skills-fs.mjs'
 
 const REGISTRY_FILE = 'skills-registry.json'
 const OUTPUT_FILE = 'docs/CATALOG.md'
-
-// The registry description is the full validator-required text (a summary
-// sentence plus "Use when ..." / "Do NOT use for ..." clauses). The catalog
-// only wants the summary, so take everything before the "Use when" clause.
-function oneLineSummary(description) {
-  const [summary] = description.split(/\.\s+use when/i)
-  const trimmed = summary.trim()
-  return trimmed.endsWith('.') ? trimmed : `${trimmed}.`
-}
 
 function loadRegistry() {
   if (!existsSync(REGISTRY_FILE)) {
@@ -45,7 +37,7 @@ function renderCatalog({ categories, skills }) {
 
     for (const skill of categorySkills) {
       const link = `../skills/${skill.path}/SKILL.md`
-      lines.push(`- [**${skill.name}**](${link}) — ${oneLineSummary(skill.description)}`)
+      lines.push(`- [**${skill.name}**](${link}) — ${summarizeDescription(skill.description)}`)
     }
     lines.push('')
   }

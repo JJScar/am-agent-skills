@@ -83,6 +83,25 @@ export function listSkillFiles(skillDir) {
   return files.sort()
 }
 
+// The validator-required description always reads "<summary>. Use when <triggers>.
+// Do NOT use for <negative scope>." — these two helpers cut it at those markers so
+// callers (catalog generator, MCP search index) don't each re-derive the same regex.
+export function summarizeDescription(description) {
+  const [summary] = description.split(/\.\s+use when/i)
+  const trimmed = summary.trim()
+  return trimmed.endsWith('.') ? trimmed : `${trimmed}.`
+}
+
+// Everything before "Do NOT use for ..." — i.e. summary + "Use when" triggers, with
+// the negative-scope clause dropped. The negative-scope clause routinely names other
+// skills' categories (e.g. "renewals", "qbr-and-reporting"), which would otherwise
+// leak into a skill's own search index and cause cross-skill false matches.
+export function stripNegativeScope(description) {
+  const [scoped] = description.split(/\.\s+do not use for/i)
+  const trimmed = scoped.trim()
+  return trimmed.endsWith('.') ? trimmed : `${trimmed}.`
+}
+
 // Deterministic SHA-256 over every file's relative path + contents, sorted —
 // same approach as the reference repo's computeSkillHash, so re-running this
 // on unchanged files always produces the same hash.
