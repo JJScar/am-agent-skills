@@ -21,7 +21,8 @@
     "generate:registry": "node tools/generate-registry.mjs",
     "generate:catalog": "node tools/generate-catalog.mjs",
     "scaffold": "node tools/skill-plugin/generate-skill.mjs",
-    "mcp:inspect": "npx -y @modelcontextprotocol/inspector node mcp-server/main.mjs"
+    "mcp:inspect": "npx -y @modelcontextprotocol/inspector node mcp-server/main.mjs",
+    "mcp:inspect:crm-example": "npx -y @modelcontextprotocol/inspector node examples/mock-crm-mcp/main.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",

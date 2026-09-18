@@ -24,6 +24,16 @@ process locally when it needs a skill, and kills it when done.
 The intended flow: `search_skills` → `read_skill` → follow the instructions →
 `fetch_skill_files` only if the instructions say to read a specific bundled file.
 
+## What this server doesn't do
+
+It never looks up live account/CRM/CS-platform data itself — it only serves skill
+*content*. A skill can instruct the agent to use the AM's own, separately-configured
+CRM/CS-platform MCP tool if one is present (this server can't call another MCP
+server even if it wanted to — only the client orchestrates across the tools in its
+own list). See [`docs/crm-tool-calling-convention.md`](../docs/crm-tool-calling-convention.md)
+for the calling convention, and `examples/mock-crm-mcp/` for a runnable worked
+example.
+
 ## Quick start (Claude Desktop)
 
 Add this to your `claude_desktop_config.json`, then restart Claude Desktop:

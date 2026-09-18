@@ -32,6 +32,8 @@ Don't assume severity from the trigger alone — "haven't heard from them in two
 
 ## Using a CRM/CS-platform tool
 
+See [`docs/crm-tool-calling-convention.md`](../../../docs/crm-tool-calling-convention.md) for the full convention this follows.
+
 If a CRM/CS-platform MCP tool is configured, use it to pull usage trend, recent support tickets, and last-contact date instead of asking the AM to recall all of it. Confirm what you found rather than re-asking.
 
 If no tool is configured, or the lookup fails, say so and ask the AM directly for what they know. Don't invent a usage trend or ticket history you don't actually have — an unverified guess presented as fact is worse than an honest "unknown."

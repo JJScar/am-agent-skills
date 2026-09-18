@@ -35,6 +35,8 @@ If the AM doesn't have an answer yet, note it as an open item in the output rath
 
 ## Using a CRM/CS-platform tool
 
+See [`docs/crm-tool-calling-convention.md`](../../../docs/crm-tool-calling-convention.md) for the full convention this follows.
+
 If the AM has a CRM or CS-platform MCP tool configured, use it to pull the account record, sales notes, and contract details instead of asking for everything by hand — confirm what you found rather than re-asking questions it already answers.
 
 If no such tool is configured (or the lookup fails), say so plainly and fall back to asking the AM directly. Never fabricate account specifics — contract value, dates, stakeholder names — to fill a gap silently.

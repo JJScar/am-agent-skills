@@ -32,6 +32,8 @@ Ask the AM:
 
 ## Using a CRM/CS-platform tool
 
+See [`docs/crm-tool-calling-convention.md`](../../../docs/crm-tool-calling-convention.md) for the full convention this follows.
+
 If a CRM/CS-platform tool is configured, pull usage trend, support ticket history, and (if it exists) notes from the original kickoff/success plan or a prior QBR, instead of asking the AM to reconstruct all of it. Confirm what you found.
 
 If no tool is configured, or something can't be found, ask the AM directly and note it as unknown rather than inventing a trend or number to fill the gap.

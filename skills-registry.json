@@ -55,8 +55,8 @@
       "author": "JJScar",
       "version": "1.0.0",
       "audience": "technical",
-      "bodyLines": 81,
-      "contentHash": "c3eeda3c2aeddfd0e46798f4c285f59ea19f501a8effe8e1f10f05609b1ea267"
+      "bodyLines": 83,
+      "contentHash": "68630741ac376e864de6276263a2e0a166963e4e33502069928d9914d790e80a"
     },
     {
       "name": "escalation-email-drafting",
@@ -84,8 +84,8 @@
       "author": "JJScar",
       "version": "1.0.0",
       "audience": "technical",
-      "bodyLines": 76,
-      "contentHash": "70776e3e57842bac3c1ad06bb87a1388bf090f27ac9a3fb1eaa901b37113f8b3"
+      "bodyLines": 78,
+      "contentHash": "1e9e249215c2337c81f9ee61c9dc4bd0fb5e92eafebe729c7ece64e5bca75bfc"
     },
     {
       "name": "qbr-prep",
@@ -99,8 +99,8 @@
       "author": "JJScar",
       "version": "1.0.0",
       "audience": "technical",
-      "bodyLines": 68,
-      "contentHash": "25a4621954d7664b886b45fec3f4109170337f529157862e3a26bd8b4f5400c1"
+      "bodyLines": 70,
+      "contentHash": "b08d2a97620ee3d0d425daace594086963bcb26daadb8e63370d1832d207fd26"
     },
     {
       "name": "renewal-prep",
@@ -113,8 +113,8 @@
       "author": "JJScar",
       "version": "1.0.0",
       "audience": "technical",
-      "bodyLines": 62,
-      "contentHash": "313a9f8f14d932b2551c788350588f3ac54b7c39de9ddda07339b81f6d243f95"
+      "bodyLines": 64,
+      "contentHash": "765410aa2e891d39dbcf158302ae0b74c8fca520597dffafaa8539e116eb6300"
     }
   ]
 }

@@ -38,6 +38,8 @@ A renewal conversation for a healthy account and a renewal conversation for an a
 
 ## Using a CRM/CS-platform tool
 
+See [`docs/crm-tool-calling-convention.md`](../../../docs/crm-tool-calling-convention.md) for the full convention this follows.
+
 If configured, pull current contract terms, usage trend, and renewal date instead of asking the AM to recite them. Confirm what's found rather than re-asking. If not configured or the lookup fails, ask the AM directly and mark anything unknown rather than guessing at contract terms — inventing a number here isn't a minor error, it's a commercial risk.
 
 ## Workflow
