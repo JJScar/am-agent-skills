@@ -25,7 +25,11 @@ No install required:
 1. Open the `SKILL.md` for the skill you want.
 2. Paste its contents into your agent's custom instructions — a Claude Project, a Custom GPT, or a Claude Code/Cursor skills folder.
 
-That's it. A CLI installer and/or MCP server are planned for later once there's enough of a catalog to justify them.
+That's it.
+
+## MCP server
+
+Prefer your agent to pull skills in live during a chat instead of pasting them by hand? See [`mcp-server/README.md`](mcp-server/README.md) — primarily built for Claude Desktop. A CLI installer is still deferred until there's a concrete agent gap that needs it.
 
 ## Audience
 
