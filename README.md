@@ -35,6 +35,10 @@ Prefer your agent to pull skills in live during a chat instead of pasting them b
 
 Skills are tagged `metadata.audience: technical | non-technical | both`. `technical` skills may assume access to a configured CRM/CS-platform tool and degrade gracefully when one isn't available. `non-technical` skills assume nothing beyond a conversation — no setup, no CLI, no JSON.
 
+## Contributing
+
+Want to add or change a skill? See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the propose → discuss → PR → validate → merge flow.
+
 ## License
 
 - **Tooling/code** (scripts, CLI, MCP server): [MIT License](LICENSE).
