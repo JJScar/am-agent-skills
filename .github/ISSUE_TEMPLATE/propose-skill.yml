@@ -1,0 +1,74 @@
+name: Propose a new skill
+description: Suggest a skill to add to the catalog — captures the fields a maintainer needs to triage before a PR is opened.
+title: "[Skill Proposal]: "
+labels: ["skill proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a skill. A maintainer will respond on this issue — usually to confirm the
+        category/audience split, flag overlap with an existing skill, or suggest a scope change — before
+        any `SKILL.md` is written. See `CONTRIBUTING.md` for the full propose → discuss → PR → validate → merge flow.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which existing skills/<category>/ this belongs to. The taxonomy is fixed for now — if none fit, pick "Other" and explain in "What it does".
+      options:
+        - Onboarding
+        - Health & Risk
+        - Expansion
+        - Renewals
+        - QBR & Reporting
+        - Communication
+        - Account Planning
+        - CRM Hygiene
+        - Cross-Functional
+        - Metrics
+        - Other / not sure (explain below)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Audience
+      description: See the Audience section in README.md.
+      options:
+        - technical
+        - non-technical
+        - both
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: What it does
+      description: A sentence or two. This becomes the core of the skill's description field later.
+      placeholder: Drafts a mid-quarter health-check summary from CRM notes and usage data.
+    validations:
+      required: true
+
+  - type: textarea
+    id: triggers
+    attributes:
+      label: Trigger phrases
+      description: Actual things an AM would say that should surface this skill.
+      placeholder: |
+        "write a health check summary"
+        "how's this account doing"
+    validations:
+      required: true
+
+  - type: textarea
+    id: overlap
+    attributes:
+      label: What it should NOT be used for (optional)
+      description: >
+        Any adjacent skill this could be confused with. Not required to open the issue, but every
+        skill's description eventually needs a "Do NOT use for ..." clause (see CONTRIBUTING.md) —
+        filling this in now saves a round-trip during discussion.
+    validations:
+      required: false

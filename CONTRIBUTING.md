@@ -4,7 +4,7 @@ This repo uses an issue-first contribution flow: proposals get discussed before 
 
 ## 1. Propose: open an issue first
 
-Before writing a `SKILL.md`, open a GitHub issue describing what you want to add or change. There's no structured proposal template yet (one is planned — see `docs/project-docs/Tickets.md` ticket AM-021 — but doesn't exist as of this writing), so just cover, in plain prose:
+Before writing a `SKILL.md`, open a GitHub issue using the [**Propose a new skill**](.github/ISSUE_TEMPLATE/propose-skill.yml) issue template. It captures the same four things a maintainer needs to triage:
 
 - **Category** — which existing `skills/<category>/` it belongs to, or a new one.
 - **Audience** — `technical`, `non-technical`, or `both` (see [Audience](README.md#audience) in the README).
