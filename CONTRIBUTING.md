@@ -11,6 +11,8 @@ Before writing a `SKILL.md`, open a GitHub issue using the [**Propose a new skil
 - **Trigger phrases** — the kinds of things an AM would say that should surface this skill.
 - **What it does** — a sentence or two; you'll turn this into the full `description` field later.
 
+Looking for a good first contribution? Check [`docs/CATALOG.md`](docs/CATALOG.md) — categories marked `_No skills yet_` have zero skills in them, so there's no risk of overlapping with something that already exists.
+
 ## 2. Discuss
 
 A maintainer will respond on the issue — usually to confirm the category/audience split, flag overlap with an existing skill, or suggest a scope change before any code is written. Wait for at least a lightweight go-ahead before opening a PR; it avoids rework on both sides.

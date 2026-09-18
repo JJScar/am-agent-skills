@@ -2,7 +2,7 @@
 
 Packaged, agent-ready skills for account managers — kickoff prep, churn triage, QBR prep, renewal prep, escalation emails, and more.
 
-**Status:** early / foundation. Starting with **technical AMs** (comfortable with an AI agent that has a CRM/CS-platform tool configured); a non-technical-AM path is planned once the format and tooling are proven out.
+**Status:** early / foundation, and **open to external contributions** — the propose → PR → validate → merge flow is live (see [Contributing](#contributing)). Starting with **technical AMs** (comfortable with an AI agent that has a CRM/CS-platform tool configured); a non-technical-AM path is planned once the format and tooling are proven out.
 
 ## What's a skill?
 
