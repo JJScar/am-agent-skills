@@ -20,7 +20,10 @@
     "validate": "node tools/validate-skills.mjs",
     "generate:registry": "node tools/generate-registry.mjs",
     "generate:catalog": "node tools/generate-catalog.mjs",
+    "build:project-template": "node tools/build-project-template.mjs",
     "scaffold": "node tools/skill-plugin/generate-skill.mjs",
+    "test": "node --test mcp-server/transports.test.mjs",
+    "start:http": "node mcp-server/main.mjs --http",
     "mcp:inspect": "npx -y @modelcontextprotocol/inspector node mcp-server/main.mjs",
     "mcp:inspect:crm-example": "npx -y @modelcontextprotocol/inspector node examples/mock-crm-mcp/main.mjs"
   },

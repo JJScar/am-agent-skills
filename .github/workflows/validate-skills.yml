@@ -6,6 +6,9 @@ on:
       - 'skills/**'
       - 'tools/**'
       - 'docs/CATALOG.md'
+      - 'docs/source-settings.md'
+      - 'templates/**'
+      - 'mcp-server/**'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/validate-skills.yml'
@@ -16,6 +19,9 @@ on:
       - 'skills/**'
       - 'tools/**'
       - 'docs/CATALOG.md'
+      - 'docs/source-settings.md'
+      - 'templates/**'
+      - 'mcp-server/**'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/validate-skills.yml'
@@ -36,6 +42,9 @@ jobs:
       - name: Validate skill frontmatter and structure
         run: npm run validate
 
+      - name: Run MCP server tests
+        run: npm test
+
       - name: Check skills-registry.json is up to date
         run: |
           npm run generate:registry
@@ -51,5 +60,14 @@ jobs:
           if [ -n "$(git status --porcelain docs/CATALOG.md)" ]; then
             echo "::error::docs/CATALOG.md is stale. Run 'npm run generate:catalog' locally and commit the result."
             git diff -- docs/CATALOG.md
+            exit 1
+          fi
+
+      - name: Check the Claude Project template is up to date
+        run: |
+          npm run build:project-template
+          if [ -n "$(git status --porcelain templates/claude-project/upload)" ]; then
+            echo "::error::templates/claude-project/upload is stale. Run 'npm run build:project-template' locally and commit the result."
+            git diff -- templates/claude-project/upload
             exit 1
           fi

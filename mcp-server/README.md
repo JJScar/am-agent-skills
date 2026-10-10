@@ -51,6 +51,24 @@ Add this to your `claude_desktop_config.json`, then restart Claude Desktop:
 
 Any other MCP-compatible client (Claude Code, Cursor) uses the same block.
 
+## Remote mode (claude.ai, ChatGPT)
+
+The same server can run as an always-on remote connector over Streamable HTTP:
+
+```bash
+npm run start:http        # http://127.0.0.1:8787/mcp, plus /health
+```
+
+It only listens on `127.0.0.1`; a tunnel such as Tailscale Funnel provides the public
+HTTPS address. Set `AM_SKILLS_PUBLIC_HOSTS` to that address's host name (comma-separated
+for more than one) so its requests pass the Host-header check, and `AM_SKILLS_PORT` to
+change the port. Both transports serve exactly the same tools (`create-server.mjs`).
+Full Mac setup, including the background service and connecting claude.ai/ChatGPT:
+[`docs/self-hosting.md`](../docs/self-hosting.md).
+
+There's no sign-in yet, which is fine only because every tool serves public skill
+content. Account-data tools won't be added to remote mode until OAuth exists.
+
 ## Local development
 
 This package isn't published to npm yet. To point Claude Desktop (or the

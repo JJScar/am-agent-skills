@@ -1,15 +1,21 @@
 #!/usr/bin/env node
-// MCP server for the am-skills catalog. Distributed as an npm bin (`am-skills-mcp`),
-// spawned locally by the AM's own agent client over stdio — no always-on server, no
-// hosting cost. See docs/target-agent-decision.md (DEC-3) and
-// docs/project-docs/Tickets.md (AM-018).
+// MCP server for the am-skills catalog. Distributed as an npm bin (`am-skills-mcp`).
+//
+// Two transports, one tool list (create-server.mjs):
+// - stdio (default): spawned locally by the AM's own agent client — no always-on
+//   server, no hosting cost. See docs/target-agent-decision.md (DEC-3), AM-018.
+// - Streamable HTTP (`--http` or AM_SKILLS_TRANSPORT=http): an always-on remote
+//   connector, e.g. on a laptop behind Tailscale Funnel. See http.mjs, AM-047,
+//   and docs/self-hosting.md.
 
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
+import { createServer } from './create-server.mjs'
+import { startHttp } from './http.mjs'
 import { buildIndexes, loadRegistry } from './registry.mjs'
-import { registerFetchSkillFilesTool } from './tools/fetch-skill-files.mjs'
-import { registerReadSkillTool } from './tools/read-skill.mjs'
-import { registerSearchSkillsTool } from './tools/search-skills.mjs'
+
+function wantsHttp(argv = process.argv.slice(2), env = process.env) {
+  return argv.includes('--http') || env.AM_SKILLS_TRANSPORT === 'http'
+}
 
 async function main() {
   process.stderr.write('[am-skills-mcp] starting\n')
@@ -17,14 +23,11 @@ async function main() {
   const indexes = buildIndexes(loadRegistry())
   const getIndexes = () => indexes
 
-  const server = new McpServer({ name: 'am-skills-mcp', version: '1.0.0' })
-
-  registerSearchSkillsTool(server, getIndexes)
-  registerReadSkillTool(server, getIndexes)
-  registerFetchSkillFilesTool(server, getIndexes)
-
-  const transport = new StdioServerTransport()
-  await server.connect(transport)
+  if (wantsHttp()) {
+    await startHttp(getIndexes)
+  } else {
+    await createServer(getIndexes).connect(new StdioServerTransport())
+  }
 
   process.stderr.write('[am-skills-mcp] ready\n')
 }
