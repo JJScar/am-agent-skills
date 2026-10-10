@@ -16,6 +16,7 @@ body:
       label: Category
       description: Which existing skills/<category>/ this belongs to. The taxonomy is fixed for now — if none fit, pick "Other" and explain in "What it does".
       options:
+        - Account Memory
         - Onboarding
         - Health & Risk
         - Expansion

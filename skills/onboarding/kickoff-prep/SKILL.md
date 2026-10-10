@@ -1,10 +1,10 @@
 ---
 name: kickoff-prep
 description: >-
-  Helps a technical Account Manager prep for a new customer's kickoff call and
-  the sales-to-onboarding handoff: gathers account context, maps stakeholders,
-  drafts a kickoff agenda, and sketches a first-pass success plan with
-  milestones. Use when the AM says things like "prep my kickoff call", "new
+  Helps an Account Manager prep for a new customer's kickoff call and the
+  sales-to-onboarding handoff: gathers account context (from the account record
+  if one exists), maps stakeholders, drafts a kickoff agenda, sketches a
+  first-pass success plan, and offers to start the account's record. Use when the AM says things like "prep my kickoff call", "new
   customer just closed, help me onboard them", "build a success plan for
   [customer]", "draft the implementation handoff", or "first call with
   [customer] is next week". Do NOT use for ongoing health scoring or churn
@@ -12,14 +12,14 @@ description: >-
   those belong to separate skills in the health-and-risk, qbr-and-reporting,
   and renewals categories.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: JJScar
-  audience: technical
+  audience: both
 ---
 
 # Kickoff & Onboarding Prep
 
-You're helping a technical Account Manager get ready for a new customer's first 30 days: the kickoff call, the sales-to-CS handoff, and a first-draft success plan. The output should be something the AM can act on immediately — an agenda they can send, a stakeholder map they can fill gaps in, a success plan they can review with the customer — not a generic essay on onboarding best practices.
+You're helping an Account Manager get ready for a new customer's first 30 days: the kickoff call, the sales-to-CS handoff, and a first-draft success plan. The output should be something the AM can act on immediately — an agenda they can send, a stakeholder map they can fill gaps in, a success plan they can review with the customer — not a generic essay on onboarding best practices.
 
 ## Before starting
 
@@ -33,11 +33,21 @@ Ask the AM (don't guess at specifics you don't have):
 
 If the AM doesn't have an answer yet, note it as an open item in the output rather than inventing one — a wrong guess about a real customer is worse than a visible gap.
 
-## Using a CRM/CS-platform tool
+## Using the account record
+
+The AM may keep a persistent record for this account: a file like `acme-corp.md` in their Claude Project, a record from a tool that reads account records, or one they paste in. **Look for it before asking anything.** If it's there:
+
+- Read it first, and don't ask questions it already answers. Confirm what you found instead ("Your record says the renewal is 2026-12-15 — still right?").
+- Before the main output, flag in a line or two anything in it that matters here: commitments of ours that are `open` and past their due date, and stakeholders marked `left` or newly added.
+- For a brand-new customer there often isn't a record yet — that's normal. Anything already in it (stakeholders, commitments made during the sales cycle) seeds the stakeholder map and the handoff checklist directly.
+
+If there's no record, say so in one line and carry on with the questions above. Never treat the record as complete: `unknown` means unknown, and something missing from the record isn't evidence either way.
+
+## Using a CRM/CS-platform tool (optional)
 
 See [`docs/crm-tool-calling-convention.md`](../../../docs/crm-tool-calling-convention.md) for the full convention this follows.
 
-If the AM has a CRM or CS-platform MCP tool configured, use it to pull the account record, sales notes, and contract details instead of asking for everything by hand — confirm what you found rather than re-asking questions it already answers.
+On top of the account record, if the AM has a CRM or CS-platform MCP tool configured, use it to pull the account record, sales notes, and contract details instead of asking for everything by hand — confirm what you found rather than re-asking questions it already answers.
 
 If no such tool is configured (or the lookup fails), say so plainly and fall back to asking the AM directly. Never fabricate account specifics — contract value, dates, stakeholder names — to fill a gap silently.
 
@@ -81,6 +91,10 @@ Treat the "success signal" and "adoption milestone" rows as placeholders to fill
 
 Ask (don't assume) whether the AM wants: an internal handoff summary (email/Slack-ready), a customer-facing kickoff agenda, the success plan as a standalone doc, or all three. Draft only what's asked for.
 
+### 6. Offer to start or update the account record
+
+The stakeholder map and the sales-cycle commitments are exactly what the account record is for. If there's no record yet, offer to start one with the `log-interaction` skill from what you've gathered. If there is one, offer to log anything new. Don't edit the record yourself here.
+
 ## Data safety
 
 Everything in this skill file uses fabricated example data. In actual use, the AM will be working with real customer information — that's expected and fine, since this is a live conversation, not skill content. What's not fine: inventing specifics (names, dates, commitments) about a real account when you don't actually know them. Ask instead.
@@ -91,6 +105,6 @@ Everything in this skill file uses fabricated example data. In actual use, the A
 - **AM says:** "Build a success plan for the account we just closed" → **Result:** Agent asks which account (if not already in context), confirms the core use case and any sales-cycle commitments, then drafts the 30/60/90 skeleton with placeholders clearly marked where account-specific detail is still needed.
 - **AM says:** "What do I need from sales before I take this account?" → **Result:** Agent produces the sales-to-CS handoff checklist and flags which items it doesn't yet have answers for.
 
-## Related skills (not yet written)
+## Related skills
 
-Ongoing health scoring, churn triage, QBR prep, and renewal prep for this account are handled by separate skills once they exist (`health-and-risk`, `qbr-and-reporting`, `renewals` categories). Don't attempt those workflows from within this skill — hand off cleanly and say so if the AM asks for one of them here.
+Ongoing health scoring, churn triage, QBR prep, and renewal prep for this account are handled by separate skills (`health-and-risk`, `qbr-and-reporting`, `renewals` categories), and logging conversations into the account record is `log-interaction` (`account-memory`). Don't attempt those workflows from within this skill — hand off cleanly and say so if the AM asks for one of them here.

@@ -1,4 +1,8 @@
 {
+  "account-memory": {
+    "name": "Account Memory",
+    "description": "Skills for keeping a persistent per-account record — logging interactions, tracking commitments, and portfolio triage"
+  },
   "onboarding": {
     "name": "Onboarding",
     "description": "Skills for kickoff calls, implementation handoff, and success-plan drafting"

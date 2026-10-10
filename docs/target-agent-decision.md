@@ -1,5 +1,7 @@
 # Target agent decision
 
+> **Update (2026-10-10):** the primary audience and product direction have since changed — see [`account-memory-decision.md`](account-memory-decision.md). The MCP-first, Claude-Desktop-primary reasoning below still applies to the local server. The CLI installer mentioned below has been dropped.
+
 Resolved by DEC-3 (see `docs/project-docs/Tickets.md`). Written up here as a fixed
 reference so later tickets (AM-017, AM-018, AM-019) don't need to re-derive it.
 

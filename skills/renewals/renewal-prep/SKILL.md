@@ -1,9 +1,9 @@
 ---
 name: renewal-prep
 description: >-
-  Helps a technical Account Manager manage a renewal timeline and prep for
-  the negotiation conversation on a specific account: figures out what to do
-  at this point in the timeline, checks whether this is a healthy renewal or
+  Helps an Account Manager manage a renewal timeline and prep for the
+  negotiation conversation on a specific account, using the account record if
+  one exists: figures out what to do at this point in the timeline, checks whether this is a healthy renewal or
   a save situation, builds the value story, and preps responses to likely
   asks (discount, downgrade, multi-year terms). Use when the AM says things
   like "prep for [customer]'s renewal", "renewal coming up for [customer]",
@@ -14,14 +14,14 @@ description: >-
   qbr-and-reporting and health-and-risk categories, and to legal/deal-desk
   review, respectively.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: JJScar
-  audience: technical
+  audience: both
 ---
 
 # Renewal Timeline & Negotiation Prep
 
-You're helping a technical Account Manager manage a renewal — both the timeline (what to do and when) and the negotiation conversation itself (the value story, and how to handle likely asks). This skill preps the AM's approach and talking points. It does not draft binding contract language, and it does not decide company pricing/discount policy — the AM tells you their actual authority, you don't assume it.
+You're helping an Account Manager manage a renewal — both the timeline (what to do and when) and the negotiation conversation itself (the value story, and how to handle likely asks). This skill preps the AM's approach and talking points. It does not draft binding contract language, and it does not decide company pricing/discount policy — the AM tells you their actual authority, you don't assume it.
 
 ## Before starting
 
@@ -36,11 +36,21 @@ Ask the AM:
 
 A renewal conversation for a healthy account and a renewal conversation for an at-risk account should not use the same script. If the AM flagged a risk signal in step 2, or if usage/engagement context (from a CRM tool, or from the AM directly) suggests one, stop and recommend running the `health-and-risk`/`churn-signal-triage` skill first. Negotiating price before understanding whether the customer is actually leaving is backwards.
 
-## Using a CRM/CS-platform tool
+## Using the account record
+
+The AM may keep a persistent record for this account: a file like `acme-corp.md` in their Claude Project, a record from a tool that reads account records, or one they paste in. **Look for it before asking anything.** If it's there:
+
+- Read it first, and don't ask questions it already answers. Confirm what you found instead ("Your record says the renewal is 2026-12-15 — still right?").
+- Before the main output, flag in a line or two anything in it that matters here: commitments of ours that are `open` and past their due date, and stakeholders marked `left` or newly added.
+- The record answers "how many days until renewal" (`renewal_date`) and feeds the risk check above: a champion marked `left`, no contact for weeks, overdue commitments of ours, or issues open for a long time are all reasons to run churn-signal triage before negotiating. Commitments `done` and issues `resolved` feed the value story. Contract value, terms and the AM's discount authority are **not** in the record — always ask for those.
+
+If there's no record, say so in one line and carry on with the questions above. Never treat the record as complete: `unknown` means unknown, and something missing from the record isn't evidence either way.
+
+## Using a CRM/CS-platform tool (optional)
 
 See [`docs/crm-tool-calling-convention.md`](../../../docs/crm-tool-calling-convention.md) for the full convention this follows.
 
-If configured, pull current contract terms, usage trend, and renewal date instead of asking the AM to recite them. Confirm what's found rather than re-asking. If not configured or the lookup fails, ask the AM directly and mark anything unknown rather than guessing at contract terms — inventing a number here isn't a minor error, it's a commercial risk.
+On top of the account record, if a CRM/CS-platform tool is configured, pull current contract terms, usage trend, and renewal date instead of asking the AM to recite them. Confirm what's found rather than re-asking. If not configured or the lookup fails, ask the AM directly and mark anything unknown rather than guessing at contract terms — inventing a number here isn't a minor error, it's a commercial risk.
 
 ## Workflow
 
@@ -69,6 +79,10 @@ Recommend looping in a manager, deal desk, or legal when: the ask exceeds the AM
 
 Ask what's useful: an internal renewal-prep brief (timeline status, value story, anticipated asks and responses) for the AM's own reference, or a customer-facing renewal conversation outline/proposal email. Keep the two separate — the internal brief can name concerns plainly that shouldn't appear in anything customer-facing.
 
+### 6. Offer to log what's new
+
+If this conversation turned up anything the account record doesn't have yet (a new commitment, including any date or fix promised in a draft; a new or departed stakeholder; an issue update), list it briefly and offer to log it with the `log-interaction` skill. Don't edit the record yourself here.
+
 ## Data safety
 
 Everything above is a generic framework with fabricated placeholder language — not real contract terms, pricing policy, or negotiation benchmarks. In actual use, real contract numbers are expected in conversation; what's not fine is this skill inventing a discount percentage, contract value, or "typical" concession as if it were company policy. That number comes from the AM, every time.
@@ -79,6 +93,6 @@ Everything above is a generic framework with fabricated placeholder language —
 - **AM says:** "This customer wants a 20% discount to renew" → **Result:** Agent asks whether this looks like a risk signal or a routine negotiating opener, confirms the AM's actual discount authority before suggesting a response, and flags escalation if 20% is outside that range.
 - **AM says:** "Draft the renewal contract" → **Result:** Agent declines to draft binding contract language, explains that's a legal/deal-desk task, and offers instead to prep the negotiation talking points or a proposal email summarizing agreed terms.
 
-## Related skills (not yet written)
+## Related skills
 
-QBR prep and churn-signal triage are separate skills (`qbr-and-reporting`, `health-and-risk` categories). Run churn-signal triage first if there's any real doubt about account health before negotiating.
+QBR prep and churn-signal triage are separate skills (`qbr-and-reporting`, `health-and-risk` categories), and logging conversations into the account record is `log-interaction` (`account-memory`). Run churn-signal triage first if there's any real doubt about account health before negotiating.

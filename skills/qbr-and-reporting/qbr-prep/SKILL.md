@@ -1,8 +1,9 @@
 ---
 name: qbr-prep
 description: >-
-  Helps a technical Account Manager prepare a QBR/EBR for an existing
-  account: pulls together usage and outcomes since the last review, builds an
+  Helps an Account Manager prepare a QBR/EBR for an existing account: pulls
+  together outcomes since the last review (from the account record if one
+  exists), builds an
   ROI narrative tied to why they bought, and produces a deck outline plus a
   one-page exec summary. Use when the AM says things like "prep my QBR for
   [customer]", "build a QBR deck", "help me put together an EBR", "quarterly
@@ -12,14 +13,14 @@ description: >-
   or renewal negotiation — those are separate skills in the onboarding,
   health-and-risk, and renewals categories.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: JJScar
-  audience: technical
+  audience: both
 ---
 
 # QBR / EBR Prep
 
-You're helping a technical Account Manager prepare a Quarterly (or Executive) Business Review for an existing account. The goal is a review that shows the customer real outcomes tied to why they bought — not a generic usage-metrics dump. If you don't know what they were trying to achieve, ask; don't guess.
+You're helping an Account Manager prepare a Quarterly (or Executive) Business Review for an existing account. The goal is a review that shows the customer real outcomes tied to why they bought — not a generic usage-metrics dump. If you don't know what they were trying to achieve, ask; don't guess.
 
 ## Before starting
 
@@ -30,11 +31,21 @@ Ask the AM:
 3. What format is actually needed: a full deck outline, a one-page exec summary, talking points, or all three?
 4. Is there anything the AM already knows is a soft spot (usage dip, unresolved issue, slow adoption) that needs careful framing rather than a surprise reveal in the meeting?
 
-## Using a CRM/CS-platform tool
+## Using the account record
+
+The AM may keep a persistent record for this account: a file like `acme-corp.md` in their Claude Project, a record from a tool that reads account records, or one they paste in. **Look for it before asking anything.** If it's there:
+
+- Read it first, and don't ask questions it already answers. Confirm what you found instead ("Your record says the renewal is 2026-12-15 — still right?").
+- Before the main output, flag in a line or two anything in it that matters here: commitments of ours that are `open` and past their due date, and stakeholders marked `left` or newly added.
+- For the review period, the record gives you most of the story: Timeline entries since the period started, commitments marked `done` (what we delivered) and still `open`, issues `resolved` versus still `open`, and stakeholder changes. Overdue commitments of ours and long-open issues are the soft spots to plan for, not hide. Usage numbers aren't in the record, so those still come from a CRM tool or the AM.
+
+If there's no record, say so in one line and carry on with the questions above. Never treat the record as complete: `unknown` means unknown, and something missing from the record isn't evidence either way.
+
+## Using a CRM/CS-platform tool (optional)
 
 See [`docs/crm-tool-calling-convention.md`](../../../docs/crm-tool-calling-convention.md) for the full convention this follows.
 
-If a CRM/CS-platform tool is configured, pull usage trend, support ticket history, and (if it exists) notes from the original kickoff/success plan or a prior QBR, instead of asking the AM to reconstruct all of it. Confirm what you found.
+On top of the account record, if a CRM/CS-platform tool is configured, pull usage trend, support ticket history, and (if it exists) notes from the original kickoff/success plan or a prior QBR, instead of asking the AM to reconstruct all of it. Confirm what you found.
 
 If no tool is configured, or something can't be found, ask the AM directly and note it as unknown rather than inventing a trend or number to fill the gap.
 
@@ -73,6 +84,10 @@ If gathering outcomes surfaced something concerning (usage dropped, a stakeholde
 
 Produce only what was asked for in step 1 — deck outline, exec summary, talking points, or a combination.
 
+### 7. Offer to log what's new
+
+If this conversation turned up anything the account record doesn't have yet (a new commitment, including any date or fix promised in a draft; a new or departed stakeholder; an issue update), list it briefly and offer to log it with the `log-interaction` skill. Don't edit the record yourself here.
+
 ## Data safety
 
 Everything above uses fabricated placeholder language, not real account data or invented metrics. In actual use the AM is working with a real account — expected. What's not fine: presenting a made-up usage number, ROI figure, or outcome as if it were verified. If you don't have it, ask or mark it unknown.
@@ -83,6 +98,6 @@ Everything above uses fabricated placeholder language, not real account data or 
 - **AM says:** "I need a one-pager for the exec sponsor" → **Result:** Agent drafts the headline outcome, one supporting number, the most important open item if any, and a clear ask — not a shrunk version of the full deck.
 - **AM says:** "Usage has actually dropped for this account, what do I do for the QBR?" → **Result:** Agent flags this plainly, suggests framing it honestly in the review rather than hiding it, and recommends the AM run churn-signal-triage separately if it looks like a real risk rather than trying to resolve it inside the QBR prep.
 
-## Related skills (not yet written)
+## Related skills
 
-Kickoff/onboarding, churn-signal triage, and renewal negotiation are separate skills (`onboarding`, `health-and-risk`, `renewals` categories). If a QBR conversation surfaces a real risk or turns into renewal negotiation, hand off rather than trying to cover it here.
+Kickoff/onboarding, churn-signal triage, and renewal negotiation are separate skills (`onboarding`, `health-and-risk`, `renewals` categories), and logging conversations into the account record is `log-interaction` (`account-memory`). If a QBR conversation surfaces a real risk or turns into renewal negotiation, hand off rather than trying to cover it here.

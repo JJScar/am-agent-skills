@@ -1,6 +1,10 @@
 {
   "version": "1.0.0",
   "categories": {
+    "account-memory": {
+      "name": "Account Memory",
+      "description": "Skills for keeping a persistent per-account record — logging interactions, tracking commitments, and portfolio triage"
+    },
     "onboarding": {
       "name": "Onboarding",
       "description": "Skills for kickoff calls, implementation handoff, and success-plan drafting"
@@ -45,7 +49,7 @@
   "skills": [
     {
       "name": "churn-signal-triage",
-      "description": "Helps a technical Account Manager triage churn-risk signals on a single account, work out a likely root cause, and pick a save play — not to design a company-wide health-scoring system. Use when the AM says things like \"this account is going quiet\", \"why is [customer] at risk\", \"signs of churn on this account\", \"help me triage this account's health\", \"should I escalate this account\", or \"haven't heard from [customer] in weeks\". Do NOT use for kickoff/onboarding prep, QBR/EBR prep, or renewal negotiation prep — those are separate skills in the onboarding, qbr-and-reporting, and renewals categories.",
+      "description": "Helps an Account Manager triage churn-risk signals on a single account, using the account record if one exists, work out a likely root cause, and pick a save play — not to design a company-wide health-scoring system. Use when the AM says things like \"this account is going quiet\", \"why is Acme at risk\", \"why is [customer] at risk\", \"is this account at risk\", \"signs of churn on this account\", \"help me triage this account's health\", \"should I escalate this account\", or \"haven't heard from [customer] in weeks\". Do NOT use for kickoff/onboarding prep, QBR/EBR prep, or renewal negotiation prep — those are separate skills in the onboarding, qbr-and-reporting, and renewals categories.",
       "category": "health-and-risk",
       "path": "health-and-risk/churn-signal-triage",
       "files": [
@@ -53,28 +57,28 @@
         "references/signal-to-play-reference.md"
       ],
       "author": "JJScar",
-      "version": "1.0.0",
-      "audience": "technical",
-      "bodyLines": 83,
-      "contentHash": "68630741ac376e864de6276263a2e0a166963e4e33502069928d9914d790e80a"
+      "version": "1.1.0",
+      "audience": "both",
+      "bodyLines": 97,
+      "contentHash": "3a69ed99ebba3353f01eb410e0cd147b23fd666580c355ef8093227d67589a0c"
     },
     {
       "name": "escalation-email-drafting",
-      "description": "Helps a technical Account Manager draft escalation and stakeholder emails when something's off track: a customer-facing issue/delay notice, an apology, an internal ask for exec or cross-functional help, or a stakeholder status update. Use when the AM says things like \"draft an escalation email for [customer]\", \"write an internal escalation to get help on this account\", \"how do I tell [customer] about this delay\", \"draft an apology email\", or \"loop in my manager on this account issue\". Do NOT use for QBR exec summaries, renewal proposal emails, routine kickoff agendas, or deciding how severe a risk is (run churn-signal-triage first if that hasn't been done) — those belong to the qbr-and-reporting, renewals, onboarding, and health-and-risk categories.",
+      "description": "Helps an Account Manager draft escalation and stakeholder emails when something's off track, grounded in the account record if one exists: a customer-facing issue/delay notice, an apology, an internal ask for exec or cross-functional help, or a stakeholder status update. Use when the AM says things like \"draft an escalation email for [customer]\", \"write an internal escalation to get help on this account\", \"how do I tell [customer] about this delay\", \"draft an apology email\", or \"loop in my manager on this account issue\". Do NOT use for QBR exec summaries, renewal proposal emails, routine kickoff agendas, or deciding how severe a risk is (run churn-signal-triage first if that hasn't been done) — those belong to the qbr-and-reporting, renewals, onboarding, and health-and-risk categories.",
       "category": "communication",
       "path": "communication/escalation-email-drafting",
       "files": [
         "SKILL.md"
       ],
       "author": "JJScar",
-      "version": "1.0.0",
-      "audience": "technical",
-      "bodyLines": 53,
-      "contentHash": "a29a42a80ebf9600d78f745eb2e89872a241dc2381cee8f9405b86202d3aac91"
+      "version": "1.1.0",
+      "audience": "both",
+      "bodyLines": 64,
+      "contentHash": "f1d7d3c2244c63f642a38399c9c8d3fa4b92aba5c6821afc1ef398fc0bddc01f"
     },
     {
       "name": "kickoff-prep",
-      "description": "Helps a technical Account Manager prep for a new customer's kickoff call and the sales-to-onboarding handoff: gathers account context, maps stakeholders, drafts a kickoff agenda, and sketches a first-pass success plan with milestones. Use when the AM says things like \"prep my kickoff call\", \"new customer just closed, help me onboard them\", \"build a success plan for [customer]\", \"draft the implementation handoff\", or \"first call with [customer] is next week\". Do NOT use for ongoing health scoring or churn triage, QBR/EBR prep on an existing account, or renewal/negotiation prep — those belong to separate skills in the health-and-risk, qbr-and-reporting, and renewals categories.",
+      "description": "Helps an Account Manager prep for a new customer's kickoff call and the sales-to-onboarding handoff: gathers account context (from the account record if one exists), maps stakeholders, drafts a kickoff agenda, sketches a first-pass success plan, and offers to start the account's record. Use when the AM says things like \"prep my kickoff call\", \"new customer just closed, help me onboard them\", \"build a success plan for [customer]\", \"draft the implementation handoff\", or \"first call with [customer] is next week\". Do NOT use for ongoing health scoring or churn triage, QBR/EBR prep on an existing account, or renewal/negotiation prep — those belong to separate skills in the health-and-risk, qbr-and-reporting, and renewals categories.",
       "category": "onboarding",
       "path": "onboarding/kickoff-prep",
       "files": [
@@ -82,14 +86,44 @@
         "references/kickoff-agenda-example.md"
       ],
       "author": "JJScar",
+      "version": "1.1.0",
+      "audience": "both",
+      "bodyLines": 92,
+      "contentHash": "adc9b12d94ff59a37946978f07a9a69b2acc7d35dba8ff29b6473e62a5425061"
+    },
+    {
+      "name": "log-interaction",
+      "description": "Updates an Account Manager's persistent account record from a call transcript, call notes, email thread or chat export — pasted in, or pulled from a connected meeting notetaker such as Granola when the AM has allowed it in their settings. It pulls out new commitments (ours and theirs), stakeholder changes, issues and a timeline entry, shows the changes for the AM to confirm, then produces the updated record. Use when the AM says things like \"log this call\", \"update Acme's record\", \"here's the transcript from today\", \"add this email thread to the account\", \"what did we just agree to\", \"track what I promised them\", or pastes a conversation and asks to save it, or says \"log today's Acme call\", \"pull my Granola notes for Acme\", or \"log all my calls from this week\". Do NOT use for preparing a call, QBR or renewal, triaging which accounts need attention, or drafting a reply to the customer — those are separate skills in the onboarding, qbr-and-reporting, renewals, communication and account-memory categories.",
+      "category": "account-memory",
+      "path": "account-memory/log-interaction",
+      "files": [
+        "SKILL.md",
+        "references/record-format.md",
+        "references/source-settings.md"
+      ],
+      "author": "JJScar",
+      "version": "1.1.0",
+      "audience": "non-technical",
+      "bodyLines": 108,
+      "contentHash": "0eacc1bfde5dad6444ea7eafca3fec5515f169760078ac094a3557b1ca1c28ab"
+    },
+    {
+      "name": "portfolio-triage",
+      "description": "Answers \"which of my accounts need me this week, and why\" for an Account Manager, by checking every account record they have against a fixed set of rules — overdue commitments, accounts gone quiet, renewals coming up, issues left open too long, and champions who have left — and ranking the accounts with the specific reasons and one next step each. Use when the AM says things like \"which accounts need me this week\", \"triage my portfolio\", \"what should I focus on today\", \"Monday review\", \"what's overdue across my accounts\", \"who haven't I talked to in a while\", or \"any renewals coming up\". Do NOT use for a deep risk diagnosis of one account, preparing a specific call, QBR or renewal, or logging a conversation — those are separate skills in the health-and-risk, onboarding, qbr-and-reporting, renewals and account-memory categories.",
+      "category": "account-memory",
+      "path": "account-memory/portfolio-triage",
+      "files": [
+        "SKILL.md"
+      ],
+      "author": "JJScar",
       "version": "1.0.0",
-      "audience": "technical",
-      "bodyLines": 78,
-      "contentHash": "1e9e249215c2337c81f9ee61c9dc4bd0fb5e92eafebe729c7ece64e5bca75bfc"
+      "audience": "non-technical",
+      "bodyLines": 89,
+      "contentHash": "0938b726dbc48a02198d443f90f505e9a33e4770a6d1d33e846ba4ebda388394"
     },
     {
       "name": "qbr-prep",
-      "description": "Helps a technical Account Manager prepare a QBR/EBR for an existing account: pulls together usage and outcomes since the last review, builds an ROI narrative tied to why they bought, and produces a deck outline plus a one-page exec summary. Use when the AM says things like \"prep my QBR for [customer]\", \"build a QBR deck\", \"help me put together an EBR\", \"quarterly business review for [customer]\", or \"exec summary for [customer]'s QBR\". Do NOT use for kickoff/onboarding prep, churn-signal triage (a QBR can surface a real risk worth flagging, but triaging it is a separate skill), or renewal negotiation — those are separate skills in the onboarding, health-and-risk, and renewals categories.",
+      "description": "Helps an Account Manager prepare a QBR/EBR for an existing account: pulls together outcomes since the last review (from the account record if one exists), builds an ROI narrative tied to why they bought, and produces a deck outline plus a one-page exec summary. Use when the AM says things like \"prep my QBR for [customer]\", \"build a QBR deck\", \"help me put together an EBR\", \"quarterly business review for [customer]\", or \"exec summary for [customer]'s QBR\". Do NOT use for kickoff/onboarding prep, churn-signal triage (a QBR can surface a real risk worth flagging, but triaging it is a separate skill), or renewal negotiation — those are separate skills in the onboarding, health-and-risk, and renewals categories.",
       "category": "qbr-and-reporting",
       "path": "qbr-and-reporting/qbr-prep",
       "files": [
@@ -97,24 +131,24 @@
         "assets/qbr-deck-outline.md"
       ],
       "author": "JJScar",
-      "version": "1.0.0",
-      "audience": "technical",
-      "bodyLines": 70,
-      "contentHash": "b08d2a97620ee3d0d425daace594086963bcb26daadb8e63370d1832d207fd26"
+      "version": "1.1.0",
+      "audience": "both",
+      "bodyLines": 84,
+      "contentHash": "d24872aaf275d4688f7a058d9021f2a09a498e529d7823356253f63236134f61"
     },
     {
       "name": "renewal-prep",
-      "description": "Helps a technical Account Manager manage a renewal timeline and prep for the negotiation conversation on a specific account: figures out what to do at this point in the timeline, checks whether this is a healthy renewal or a save situation, builds the value story, and preps responses to likely asks (discount, downgrade, multi-year terms). Use when the AM says things like \"prep for [customer]'s renewal\", \"renewal coming up for [customer]\", \"help me negotiate this renewal\", \"when should I start the renewal conversation\", or \"[customer] wants a discount on renewal\". Do NOT use for QBR prep, churn-signal triage (run that first if risk is suspected), or drafting final legal contract language — those belong to the qbr-and-reporting and health-and-risk categories, and to legal/deal-desk review, respectively.",
+      "description": "Helps an Account Manager manage a renewal timeline and prep for the negotiation conversation on a specific account, using the account record if one exists: figures out what to do at this point in the timeline, checks whether this is a healthy renewal or a save situation, builds the value story, and preps responses to likely asks (discount, downgrade, multi-year terms). Use when the AM says things like \"prep for [customer]'s renewal\", \"renewal coming up for [customer]\", \"help me negotiate this renewal\", \"when should I start the renewal conversation\", or \"[customer] wants a discount on renewal\". Do NOT use for QBR prep, churn-signal triage (run that first if risk is suspected), or drafting final legal contract language — those belong to the qbr-and-reporting and health-and-risk categories, and to legal/deal-desk review, respectively.",
       "category": "renewals",
       "path": "renewals/renewal-prep",
       "files": [
         "SKILL.md"
       ],
       "author": "JJScar",
-      "version": "1.0.0",
-      "audience": "technical",
-      "bodyLines": 64,
-      "contentHash": "765410aa2e891d39dbcf158302ae0b74c8fca520597dffafaa8539e116eb6300"
+      "version": "1.1.0",
+      "audience": "both",
+      "bodyLines": 78,
+      "contentHash": "7e3e27dd1d6ab0a1b3f3e9a2b146d7dd117b4ea3ab638951f2f8e75732ddddf2"
     }
   ]
 }
