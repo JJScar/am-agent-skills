@@ -117,13 +117,25 @@ describe('Streamable HTTP transport', () => {
 })
 
 describe('readHttpConfig', () => {
-  test('defaults to port 8787 and no public hosts', () => {
-    assert.deepEqual(readHttpConfig({}), { port: 8787, publicHosts: [] })
+  test('defaults: port 8787, no public hosts, sign-in on, localhost URL', () => {
+    const config = readHttpConfig({ AM_SKILLS_STATE_DIR: '/tmp/x' })
+    assert.equal(config.port, 8787)
+    assert.deepEqual(config.publicHosts, [])
+    assert.equal(config.auth, 'oauth')
+    assert.equal(config.publicUrl.href, 'http://localhost:8787/')
+    assert.equal(config.stateDir, '/tmp/x')
   })
 
-  test('parses a comma-separated, case-insensitive host list', () => {
+  test('parses a comma-separated, case-insensitive host list and derives the public URL from it', () => {
     const config = readHttpConfig({ AM_SKILLS_PORT: '9000', AM_SKILLS_PUBLIC_HOSTS: ' A.ts.net, b.ts.net ,' })
-    assert.deepEqual(config, { port: 9000, publicHosts: ['a.ts.net', 'b.ts.net'] })
+    assert.equal(config.port, 9000)
+    assert.deepEqual(config.publicHosts, ['a.ts.net', 'b.ts.net'])
+    assert.equal(config.publicUrl.href, 'https://a.ts.net/')
+  })
+
+  test('AM_SKILLS_AUTH=none turns sign-in off; anything else is rejected', () => {
+    assert.equal(readHttpConfig({ AM_SKILLS_AUTH: 'none' }).auth, 'none')
+    assert.throws(() => readHttpConfig({ AM_SKILLS_AUTH: 'maybe' }), /AM_SKILLS_AUTH/)
   })
 
   test('rejects a bad port', () => {

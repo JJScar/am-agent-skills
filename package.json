@@ -22,13 +22,15 @@
     "generate:catalog": "node tools/generate-catalog.mjs",
     "build:project-template": "node tools/build-project-template.mjs",
     "scaffold": "node tools/skill-plugin/generate-skill.mjs",
-    "test": "node --test mcp-server/transports.test.mjs",
+    "test": "node --test mcp-server/transports.test.mjs mcp-server/auth.test.mjs",
     "start:http": "node mcp-server/main.mjs --http",
+    "auth:set-passphrase": "node mcp-server/auth/set-passphrase.mjs",
     "mcp:inspect": "npx -y @modelcontextprotocol/inspector node mcp-server/main.mjs",
     "mcp:inspect:crm-example": "npx -y @modelcontextprotocol/inspector node examples/mock-crm-mcp/main.mjs"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "express": "^5.3.0",
     "fuse.js": "^7.5.0",
     "js-yaml": "^4.1.0",
     "zod": "^4.6.5"

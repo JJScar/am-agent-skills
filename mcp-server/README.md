@@ -56,18 +56,30 @@ Any other MCP-compatible client (Claude Code, Cursor) uses the same block.
 The same server can run as an always-on remote connector over Streamable HTTP:
 
 ```bash
-npm run start:http        # http://127.0.0.1:8787/mcp, plus /health
+npm run auth:set-passphrase   # once: the passphrase you'll approve assistants with
+npm run start:http            # http://127.0.0.1:8787/mcp, plus /health
 ```
 
 It only listens on `127.0.0.1`; a tunnel such as Tailscale Funnel provides the public
-HTTPS address. Set `AM_SKILLS_PUBLIC_HOSTS` to that address's host name (comma-separated
-for more than one) so its requests pass the Host-header check, and `AM_SKILLS_PORT` to
-change the port. Both transports serve exactly the same tools (`create-server.mjs`).
-Full Mac setup, including the background service and connecting claude.ai/ChatGPT:
-[`docs/self-hosting.md`](../docs/self-hosting.md).
+HTTPS address. MCP is served at both `/mcp` and `/`, and both transports serve exactly
+the same tools (`create-server.mjs`).
 
-There's no sign-in yet, which is fine only because every tool serves public skill
-content. Account-data tools won't be added to remote mode until OAuth exists.
+**Sign-in is on by default (OAuth 2.1).** Assistants register themselves (`/register`),
+you approve each one on a sign-in page with your passphrase (`/authorize`), and
+`/mcp` rejects any request without a valid access token. Metadata lives at
+`/.well-known/oauth-protected-resource[/mcp]` and
+`/.well-known/oauth-authorization-server`. Code: `auth/`.
+
+| Variable | Default | Meaning |
+| --- | --- | --- |
+| `AM_SKILLS_PORT` | `8787` | Local port. |
+| `AM_SKILLS_PUBLIC_HOSTS` | (none) | Comma-separated public host names (your `*.ts.net` name) allowed past the Host-header check. |
+| `AM_SKILLS_PUBLIC_URL` | `https://<first public host>` | The address assistants use; the OAuth issuer and resource URLs are built from it. |
+| `AM_SKILLS_AUTH` | `oauth` | `none` turns sign-in off. Only for a skills-only server, never with account data. |
+| `AM_SKILLS_STATE_DIR` | `~/.am-skills` | Where `auth.json` (passphrase hash, registered assistants, hashed tokens) lives. |
+
+Full Mac setup, including the background service and connecting claude.ai and ChatGPT:
+[`docs/self-hosting.md`](../docs/self-hosting.md).
 
 ## Local development
 

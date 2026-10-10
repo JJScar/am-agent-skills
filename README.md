@@ -35,7 +35,7 @@ That's it.
 
 ## MCP server
 
-Prefer your agent to pull skills in live during a chat instead of pasting them by hand? See [`mcp-server/README.md`](mcp-server/README.md) — primarily built for Claude Desktop. It serves skill content today; account-memory tools are next.
+Prefer your agent to pull skills in live during a chat instead of pasting them by hand? See [`mcp-server/README.md`](mcp-server/README.md). It runs locally for Claude Desktop, or as an always-on remote connector for claude.ai and ChatGPT, with passphrase-approved OAuth sign-in. [`docs/self-hosting.md`](docs/self-hosting.md) covers running it on a spare Mac. It serves skill content today; account-memory tools are next.
 
 ## Audience
 
