@@ -106,10 +106,18 @@ Then check it from **outside** your network, e.g. on your phone with Wi-Fi off:
 
 ## 4. Connect your AI assistant
 
-The connector URL is `https://my-laptop.tail1234.ts.net/mcp` (note the `/mcp`).
+The connector URL is `https://my-laptop.tail1234.ts.net/mcp`. The bare
+`https://my-laptop.tail1234.ts.net` works too, since the server answers MCP at both.
 
 **claude.ai:** Settings → Connectors → **Add custom connector** → paste the URL →
 Authentication: **No sign in**. On a Free plan you can have one custom connector.
+
+> **Pick "No sign in" explicitly.** claude.ai's *recommended* option ("Use Claude's
+> published identity" / "Register automatically") is OAuth, and this server has no
+> sign-in yet. If you choose it, the connection fails, and the log shows
+> `GET /.well-known/oauth-protected-resource → 404`, `GET /.well-known/oauth-authorization-server → 404`
+> and `POST /register → 404`. The recommended option becomes the right one once AM-048
+> adds OAuth.
 
 **ChatGPT:** Settings → Connectors → Advanced → turn on **Developer mode**, then
 **Create** a connector with the URL and **No authentication**. Developer mode needs
@@ -120,6 +128,16 @@ but will once records can be saved (AM-056 confirms it).
 Then try it in a new chat: *"Use my am-skills connector to find the skill for
 triaging my accounts this week."* You should see a `search_skills` call, and the
 request in the log.
+
+## Reading the log
+
+| You see | Meaning |
+| --- | --- |
+| `POST /mcp → 200` | An assistant is talking to the server. All good. |
+| `… /.well-known/oauth-… → 404`, `POST /register → 404` | The connector was set up with OAuth sign-in. Re-add it with **No sign in**. |
+| `POST … → 403` | The name passed to the install script doesn't match `tailscale funnel status`. |
+| nothing at all when you connect | The request isn't reaching the laptop: check the URL, and that `tailscale funnel status` says `(Funnel on)`. |
+| `GET / → 405`, `GET /favicon.ico → 404` | A browser opened the base address. Harmless. |
 
 ## Day to day
 

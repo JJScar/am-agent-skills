@@ -20,6 +20,7 @@ import { createServer, SERVER_INFO } from './create-server.mjs'
 
 const BIND_HOST = '127.0.0.1'
 const DEFAULT_PORT = 8787
+const MCP_PATHS = ['/mcp', '/']
 
 function log(message) {
   process.stderr.write(`[am-skills-mcp] ${message}\n`)
@@ -60,7 +61,10 @@ export function createHttpApp(getIndexes, { publicHosts = [] } = {}) {
     res.json({ ok: true, server: SERVER_INFO.name, version: SERVER_INFO.version })
   })
 
-  app.post('/mcp', async (req, res) => {
+  // MCP is served at both /mcp and the bare root: people pasting the connector URL
+  // into claude.ai or ChatGPT routinely leave off the /mcp, and the request then
+  // arrives as POST / (seen in the first real connection attempt).
+  app.post(MCP_PATHS, async (req, res) => {
     const server = createServer(getIndexes)
     const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined })
 
@@ -73,14 +77,14 @@ export function createHttpApp(getIndexes, { publicHosts = [] } = {}) {
       await server.connect(transport)
       await transport.handleRequest(req, res, req.body)
     } catch (error) {
-      log(`error handling POST /mcp: ${error instanceof Error ? error.message : String(error)}`)
+      log(`error handling POST ${req.path}: ${error instanceof Error ? error.message : String(error)}`)
       if (!res.headersSent) jsonRpcError(res, 500, 'Internal server error')
     }
   })
 
   // Stateless mode has no server-initiated stream and no sessions to delete.
-  app.get('/mcp', (_req, res) => jsonRpcError(res, 405, 'Method not allowed'))
-  app.delete('/mcp', (_req, res) => jsonRpcError(res, 405, 'Method not allowed'))
+  app.get(MCP_PATHS, (_req, res) => jsonRpcError(res, 405, 'Method not allowed'))
+  app.delete(MCP_PATHS, (_req, res) => jsonRpcError(res, 405, 'Method not allowed'))
 
   return app
 }

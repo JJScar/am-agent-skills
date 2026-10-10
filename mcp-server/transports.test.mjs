@@ -86,6 +86,16 @@ describe('Streamable HTTP transport', () => {
     assert.ok((await httpClient.listTools()).tools.length > 0)
   })
 
+  test('also serves MCP at the bare root, for a connector URL pasted without /mcp', async () => {
+    const rootClient = await connect(new StreamableHTTPClientTransport(new URL(`${baseUrl}/`)))
+    try {
+      const { tools } = await rootClient.listTools()
+      assert.ok(tools.some((t) => t.name === 'search_skills'))
+    } finally {
+      await rootClient.close()
+    }
+  })
+
   test('health endpoint answers', async () => {
     const res = await fetch(`${baseUrl}/health`)
     assert.equal(res.status, 200)
@@ -100,9 +110,9 @@ describe('Streamable HTTP transport', () => {
     assert.equal(await getStatusWithHost(`${baseUrl}/health`, PUBLIC_HOST), 200)
   })
 
-  test('GET /mcp is not allowed in stateless mode', async () => {
-    const res = await fetch(`${baseUrl}/mcp`)
-    assert.equal(res.status, 405)
+  test('GET is not allowed in stateless mode, at /mcp or /', async () => {
+    assert.equal((await fetch(`${baseUrl}/mcp`)).status, 405)
+    assert.equal((await fetch(`${baseUrl}/`)).status, 405)
   })
 })
 
