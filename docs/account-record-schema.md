@@ -140,7 +140,27 @@ Newest first. Add an entry for every logged interaction.
 - **Logging an interaction** (AM-032 / AM-041) adds timeline rows and new commitment
   IDs, updates stakeholder Last seen and `last_contact`, and never deletes rows.
 
-## Changing the format
+## How the server reads records
+
+From Phase B, the MCP server reads and writes these files itself
+(`mcp-server/account-store.mjs`), from a data folder on the server's machine:
+`AM_SKILLS_DATA_DIR`, default `~/am-skills-data/`, always outside the repo. Files are
+written with owner-only permissions. It treats two kinds of mistakes differently:
+
+- **Structure problems stop the record from being read:** bad frontmatter YAML, a
+  missing, unknown or out-of-order section, table columns that don't match this doc,
+  a row with the wrong number of cells, or stray text inside a table section. The
+  error names the file, the section and the line, so it can be fixed by hand.
+- **Value problems are reported but don't hide the account:** a malformed date, a
+  status outside the allowed values, two active champions, or a duplicate ID. The
+  account still shows up (for example in triage) with its problems listed. The server
+  won't save a record until they're fixed.
+
+Spacing inside tables is forgiving (`|C-001|  text |` reads fine) and is tidied to the
+canonical layout on the next save. Frontmatter you didn't change is written back
+exactly as it was. The server never overwrites a file that changed on disk after it
+read it, for example if you edited the file by hand in the meantime.
+
 
 A condensed copy of this doc is bundled with the `log-interaction` skill at
 `skills/account-memory/log-interaction/references/record-format.md`, so the skill
