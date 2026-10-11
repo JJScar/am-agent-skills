@@ -59,7 +59,8 @@ npm run auth:set-passphrase
 
 It asks twice and doesn't show what you type. Only a scrypt hash is stored, in
 `~/.am-skills/auth.json`, which only your user account can read. Setting a new
-passphrase later signs out every connected assistant.
+passphrase later signs out every connected assistant, and takes effect at once,
+even while the server is running: no restart needed.
 
 ## 3. Set up Tailscale Funnel
 
@@ -183,7 +184,8 @@ no token.
 | Watch requests | `tail -f ~/Library/Logs/am-skills-mcp.log` |
 | Restart | `launchctl kickstart -k gui/$(id -u)/com.amskills.mcp` |
 | Update to the latest code | `git pull && npm ci && npm test`, then restart |
-| Sign every assistant out | `npm run auth:set-passphrase` (a new passphrase revokes all tokens), then restart |
+| Change the passphrase | `npm run auth:set-passphrase`. Works while the server runs; every assistant is signed out, so reconnect each one (Settings → Connectors → Connect) and approve with the new passphrase |
+| Sign every assistant out | Same: setting a passphrase (even a new one) revokes all tokens |
 | Forgot the passphrase | Same: set a new one and reconnect your assistants |
 | After upgrading Node | re-run `deploy/macos/install-service.sh <host>` (the service stores Node's exact path) |
 | Take it offline | `tailscale funnel --https=443 off` |

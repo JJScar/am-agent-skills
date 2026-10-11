@@ -314,6 +314,28 @@ describe('OAuth sign-in', () => {
     })
   }
 
+  test('changing the passphrase while the server runs takes effect without a restart', async () => {
+    const client = await register()
+    const { tokens } = await signIn(client)
+
+    const NEW = 'a different passphrase entirely'
+    new AuthStore(stateDir).setPassphrase(hashPassphrase(NEW)) // as the CLI would, separately
+
+    // Existing sign-ins are revoked…
+    const old = new StreamableHTTPClientTransport(new URL(`${base}/mcp`), {
+      requestInit: { headers: { Authorization: `Bearer ${tokens.access_token}` } },
+    })
+    await assert.rejects(new Client({ name: 't', version: '0' }).connect(old))
+
+    // …the old passphrase no longer approves, and the new one does.
+    const id = await startAuthorization(client, { challenge: pkcePair().challenge })
+    assert.equal((await consent(id, { passphrase: PASSPHRASE, action: 'approve' })).status, 401)
+    assert.equal((await consent(id, { passphrase: NEW, action: 'approve' })).status, 302)
+
+    // Put the suite's passphrase back for the tests that follow.
+    new AuthStore(stateDir).setPassphrase(hashPassphrase(PASSPHRASE))
+  })
+
   test('/health stays public and reports that sign-in is on', async () => {
     const body = await (await fetch(`${base}/health`)).json()
     assert.equal(body.auth, 'oauth')
@@ -328,6 +350,35 @@ describe('OAuth configuration', () => {
         () => createHttpApp(() => ({}), { auth: 'oauth', publicUrl: new URL('http://localhost:1'), store: new AuthStore(dir) }),
         /auth:set-passphrase/,
       )
+    } finally {
+      rmSync(dir, { recursive: true, force: true })
+    }
+  })
+
+  // Regression: the server used to keep auth.json in memory from startup, so a
+  // passphrase changed by `npm run auth:set-passphrase` (a separate process) was
+  // silently written back to the old one on the server's next save.
+  test('a passphrase changed by another process survives the running server saving', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'am-skills-auth-race-'))
+    try {
+      const server = new AuthStore(dir)
+      server.setPassphrase(hashPassphrase(PASSPHRASE))
+      server.putToken('accessTokens', 'old-token', { clientId: 'c', expiresAt: Date.now() / 1000 + 600 })
+
+      const cli = new AuthStore(dir) // what set-passphrase.mjs does
+      const newRecord = hashPassphrase('the brand new passphrase')
+      cli.setPassphrase(newRecord)
+
+      // The server sees the change straight away…
+      assert.deepEqual(server.passphrase, newRecord)
+      assert.equal(server.getToken('accessTokens', 'old-token'), undefined)
+
+      // …and its next save keeps it rather than writing the old state back.
+      server.putToken('accessTokens', 'new-token', { clientId: 'c', expiresAt: Date.now() / 1000 + 600 })
+      const onDisk = new AuthStore(dir)
+      assert.deepEqual(onDisk.passphrase, newRecord)
+      assert.equal(onDisk.getToken('accessTokens', 'old-token'), undefined)
+      assert.ok(onDisk.getToken('accessTokens', 'new-token'))
     } finally {
       rmSync(dir, { recursive: true, force: true })
     }
